@@ -70,7 +70,7 @@ def send_message(data):
 # ================== App ==================
 status = 'Temporarily Out-of-Stock'
 while status == 'Temporarily Out-of-Stock':
-    time.sleep(3)
+    time.sleep(ONE_HOUR)
     print(datetime.datetime.now())
     status = get_availability(PRODUCT_URL, ELEMENT_XPATH)
     if status != 'Temporarily Out-of-Stock':
