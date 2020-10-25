@@ -13,7 +13,7 @@ import datetime
 # ================== Local Variables ==================
 ONE_HOUR = 3600
 SCRIPT = 'send-message.applescript'
-DRIVER_PATH = '/Users/viniciusrocha/development/VER-product-watcher/src/web-driver/chromedriver'
+DRIVER_PATH = '../web-driver/chromedriver'
 PRODUCT_URL = 'https://www.amway.com/en_US/Pursue%26trade%3B-Disinfectant-Deodorizer-Spray-%28ORDER-LIMIT-5%29-p-E0023?searchTerm=pursue'
 ELEMENT_XPATH = '/html/body/main/div[11]/div[2]/div[1]/div[2]/div/div[2]/div/div[2]/div[1]/div[1]/div/div/div[1]/div[2]/div/span/span[2]'
 
@@ -70,7 +70,7 @@ def send_message(data):
 # ================== App ==================
 status = 'Temporarily Out-of-Stock'
 while status == 'Temporarily Out-of-Stock':
-    time.sleep(ONE_HOUR)
+    time.sleep(3)
     print(datetime.datetime.now())
     status = get_availability(PRODUCT_URL, ELEMENT_XPATH)
     if status != 'Temporarily Out-of-Stock':
