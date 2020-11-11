@@ -8,6 +8,7 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.chrome.options import Options
 import time
 import datetime
+import config
 
 
 # ================== Local Variables ==================
@@ -44,15 +45,39 @@ def get_availability(url, xpath):
     # chrome_options.add_argument('--headless')
     driver = webdriver.Chrome(DRIVER_PATH, options=chrome_options)
 
+
+def login():
+    DRIVER.get('https://www.amway.com/en_US/')
+    sign_in = '//*[@id="mainHeader"]/div/header/div[2]/div/div[3]/div[3]/div/div[1]/button'
+    DRIVER.find_element_by_xpath(sign_in).click()
+
+    sign_in_menu = '/html/body/main/div[3]/div/div/ul/li[1]/a'
+    DRIVER.find_element_by_xpath(sign_in_menu).click()
+
+    time.sleep(7)
+
+    amway_id_input = '/html/body/div/div/div/app-root/div/div[1]/div/app-signin/div/div/div/div/div/div/app-smart-id/div/app-form-field/div/input'
+    amway_id_input = DRIVER.find_element_by_xpath(amway_id_input)
+    amway_id_input.send_keys(config.email)
+
+    password_input = '/html/body/div/div/div/app-root/div/div[1]/div/app-signin/div/div/div/div/div/div/password/div/div[2]/input'
+    password_input = DRIVER.find_element_by_xpath(password_input)
+    password_input.send_keys(config.password)
+
+    sign_in_btn = '/html/body/div/div/div/app-root/div/div[1]/div/app-signin/div/div/div/div/div/div/app-button/button'
+    DRIVER.find_element_by_xpath(sign_in_btn).click()
+
+
+def get_availability(url, xpath):
     # Open Chrome on the URL
-    driver.get(url)
+    DRIVER.get(url)
 
     # Get test from the HTML element
-    availability = driver.find_element_by_xpath(xpath).text
+    availability = DRIVER.find_element_by_xpath(xpath).text
 
     # Wait a second and close the window
     time.sleep(1)
-    driver.quit()
+    DRIVER.quit()
 
     return availability
 
